@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.awt.desktop.SystemEventListener;
+
 @Controller
 @RequestMapping("/notes")
 public class NotesController {
@@ -30,7 +32,10 @@ public class NotesController {
     @PostMapping
     public String postCredentials(@ModelAttribute("newNote") NotesForm notesForm, Model model)
     {
+        //System.out.println(notesForm.getDescription());
+        //System.out.println(notesService.getNotes());
         this.checkSuccess = notesService.addNote(notesForm);
+       // System.out.println(checkSuccess);
         if (checkSuccess >= 1 ) {
             model.addAttribute("result", "success");
 

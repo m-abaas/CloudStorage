@@ -2,6 +2,7 @@ package com.udacity.jwdnd.course1.cloudstorage.controller;
 
 import com.udacity.jwdnd.course1.cloudstorage.model.Credentials;
 import com.udacity.jwdnd.course1.cloudstorage.model.CredentialsForm;
+import com.udacity.jwdnd.course1.cloudstorage.model.Notes;
 import com.udacity.jwdnd.course1.cloudstorage.model.NotesForm;
 import com.udacity.jwdnd.course1.cloudstorage.services.CredentialsService;
 import com.udacity.jwdnd.course1.cloudstorage.services.NotesService;
@@ -20,11 +21,11 @@ public class HomeController {
 
     private CredentialsService credentialsService;
     private NotesService notesService;
-    private List<Credentials> credentials;
+    //private List<Credentials> credentials;
 
     public HomeController(CredentialsService credentialsService, NotesService notesService)
     {
-        this.credentials = new ArrayList<>();
+        //this.credentials = new ArrayList<>();
         this.credentialsService = credentialsService;
         this.notesService = notesService;
     }
@@ -39,6 +40,7 @@ public class HomeController {
         //this.credentials.add(new Credentials(12, "tepo", "tempos", "tempa", "tompo", 12));
 
          model.addAttribute("credentials", this.credentialsService.getCredentials());
+         model.addAttribute("notes", this.notesService.getNotes());
         //System.out.println(credentials[1].url);
         //model.addAttribute("credentials", credentials);
         return "home";

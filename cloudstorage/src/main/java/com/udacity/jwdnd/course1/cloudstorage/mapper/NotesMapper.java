@@ -10,7 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface NotesMapper {
-    @Select("SELECT * FROM CREDENTIALS")
+    @Select("SELECT * FROM NOTES")
     List<Notes> getNotes();
 
     @Insert("INSERT INTO NOTES (notetitle, notedescription, userid) VALUES(#{noteTitle}, #{noteDescription}, #{userId})")
