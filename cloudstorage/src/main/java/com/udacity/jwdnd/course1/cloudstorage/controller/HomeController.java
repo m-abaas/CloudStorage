@@ -5,6 +5,7 @@ import com.udacity.jwdnd.course1.cloudstorage.model.CredentialsForm;
 import com.udacity.jwdnd.course1.cloudstorage.model.Notes;
 import com.udacity.jwdnd.course1.cloudstorage.model.NotesForm;
 import com.udacity.jwdnd.course1.cloudstorage.services.CredentialsService;
+import com.udacity.jwdnd.course1.cloudstorage.services.FilesService;
 import com.udacity.jwdnd.course1.cloudstorage.services.NotesService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,13 +22,15 @@ public class HomeController {
 
     private CredentialsService credentialsService;
     private NotesService notesService;
+    private FilesService filesService;
     //private List<Credentials> credentials;
 
-    public HomeController(CredentialsService credentialsService, NotesService notesService)
+    public HomeController(CredentialsService credentialsService, NotesService notesService, FilesService filesService)
     {
         //this.credentials = new ArrayList<>();
         this.credentialsService = credentialsService;
         this.notesService = notesService;
+        this.filesService = filesService;
     }
 
 
@@ -41,6 +44,7 @@ public class HomeController {
 
          model.addAttribute("credentials", this.credentialsService.getCredentials());
          model.addAttribute("notes", this.notesService.getNotes());
+         model.addAttribute("files", this.filesService.getFiles());
         //System.out.println(credentials[1].url);
         //model.addAttribute("credentials", credentials);
         return "home";

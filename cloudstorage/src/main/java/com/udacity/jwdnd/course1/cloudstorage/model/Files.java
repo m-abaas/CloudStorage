@@ -3,16 +3,25 @@ package com.udacity.jwdnd.course1.cloudstorage.model;
 import java.io.InputStream;
 
 public class Files {
-    private Integer filedId;
+    private Integer fileId;
     private String fileName;
     private String contentType;
-    private String fileSize;
+    private Long fileSize;
     private Integer userId;
     private InputStream fileData;
 
+    public Files(Integer fileId, String fileName, String contentType, Long fileSize, Integer userId, InputStream fileData)
+    {
+        this.fileId = fileId;
+        this.fileName = fileName;
+        this.contentType = contentType;
+        this.fileSize = fileSize;
+        this.userId = userId;
+        this.fileData = fileData;
+    }
     // Getters and Setters
-    public Integer getFiledId() { return filedId; }
-    public void setFiledId(Integer filedId) { this.filedId = filedId; }
+    public Integer getFileId() { return fileId; }
+    public void setFileId(Integer fileId) { this.fileId = fileId; }
 
     public String getFileName() { return fileName; }
     public void setFileName(String fileName) { this.fileName = fileName; }
@@ -20,8 +29,8 @@ public class Files {
     public String getContentType() { return contentType; }
     public void setContentType(String contentType) { this.contentType = contentType; }
 
-    public String getFileSize() { return fileSize; }
-    public void setFileSize(String fileSize) { this.fileSize = fileSize; }
+    public Long getFileSize() { return fileSize; }
+    public void setFileSize(Long fileSize) { this.fileSize = fileSize; }
 
     public Integer getUserId() { return userId; }
     public void setUserId(Integer userId) { this.userId = userId; }
