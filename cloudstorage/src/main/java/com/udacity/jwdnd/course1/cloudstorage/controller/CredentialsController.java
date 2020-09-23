@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CredentialsController {
 
     private CredentialsService credentialsService;
+    private int checkSuccess;
 
     public CredentialsController(CredentialsService credentialsService)
     {
@@ -23,17 +24,25 @@ public class CredentialsController {
     @GetMapping
     public String getCredentials(@ModelAttribute("newCredential") CredentialsForm credentialsForm, Model model)
     {
-        return "home";
+        model.addAttribute("credentials", this.credentialsService.getCredentials());
+        return "result";
     }
 
     @PostMapping
     public String postCredentials(@ModelAttribute("newCredential") CredentialsForm credentialsForm, Model model)
     {
-        credentialsService.addCredential(credentialsForm);
-        System.out.println(credentialsForm.getUrl());
-        System.out.println(credentialsForm.getPassword());
-        System.out.println(credentialsForm.getUserName());
-        return "home";
+        this.checkSuccess = credentialsService.addCredential(credentialsForm);
+        if (checkSuccess >= 1 ) {
+            model.addAttribute("result", "success");
+
+        } else {
+            model.addAttribute("result", "failure");
+        }
+
+        //System.out.println(credentialsForm.getUrl());
+        //System.out.println(credentialsForm.getPassword());
+        //System.out.println(credentialsForm.getUserName());
+        return "result";
     }
 
 }
