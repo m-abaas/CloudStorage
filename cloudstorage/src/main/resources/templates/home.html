@@ -97,15 +97,15 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form action="#" method="POST">
+                                <form action="#" th:object="${newNote}" method="POST" th:action="@{/notes}">
                                     <input type="hidden" name="noteId" id="note-id">
                                     <div class="form-group">
                                         <label for="note-title" class="col-form-label">Title</label>
-                                        <input type="text" name= "noteTitle" class="form-control" id="note-title" maxlength="20" required>
+                                        <input th:field="*{title}" type="text" name= "noteTitle" class="form-control"  id="note-title" maxlength="20" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="note-description" class="col-form-label">Description</label>
-                                        <textarea class="form-control" name="noteDescription" id="note-description" rows="5" maxlength="1000" required></textarea>
+                                        <textarea th:field="*{description}"  class="form-control" name="noteDescription" id="note-description" rows="5" maxlength="1000" required></textarea>
                                     </div>
                                     <button id="noteSubmit" type="submit" class="d-none"></button>
                                 </form>
@@ -123,7 +123,7 @@
                     + Add a New Credential
                 </button>
 
-                <div class="table-responsive" th:each="credential : ${credentials}">
+                <div class="table-responsive">
                     <table class="table table-striped" id="credentialTable">
                         <thead>
                         <tr>
@@ -134,13 +134,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
+                        <tr th:each="credential : ${credentials}">
                             <td>
                                 <button type="button" class="btn btn-success">Edit</button>
                                 <a class="btn btn-danger">Delete</a>
                             </td>
-                            <th scope="row" th:text="${credential?.url}">Example Credential URL</th>
-                            <td th:text="${credential?.username}">Example Credential Username</td>
+                            <th scope="row"  th:text="${credential?.url}">Example Credential URL</th>
+                            <td th:text="${credential?.userName}">Example Credential Username</td>
                             <td th:text="${credential?.password}">Example Credential Password</td>
                         </tr>
                         </tbody>
