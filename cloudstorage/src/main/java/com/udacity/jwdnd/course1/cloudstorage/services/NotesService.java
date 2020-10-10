@@ -11,17 +11,20 @@ import java.util.List;
 public class NotesService {
 
     private NotesMapper notesMapper;
+    private UserService userService;
 
-    public NotesService(NotesMapper notesMapper) {
+    public NotesService(NotesMapper notesMapper, UserService userService) {
         this.notesMapper = notesMapper;
+        this.userService = userService;
     }
 
-    public int addNote(NotesForm notesForm) {
-        return notesMapper.insert(new Notes(null, notesForm.getTitle(), notesForm.getDescription(), 1));
+    public int addNote(NotesForm notesForm, String userName) {
+        return notesMapper.insert(new Notes(null, notesForm.getTitle(),
+                notesForm.getDescription(), userService.getUser(userName).getUserId()));
     }
 
-    public List<Notes> getNotes() {
-        return this.notesMapper.getNotes();
+    public List<Notes> getNotes(String userName) {
+        return this.notesMapper.getNotes(userService.getUser(userName).getUserId());
     }
 
 }

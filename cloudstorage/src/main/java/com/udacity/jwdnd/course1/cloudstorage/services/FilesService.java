@@ -16,19 +16,22 @@ import java.util.List;
 public class FilesService {
 
     private FilesMapper filesMapper;
+    private UserService userService;
 
-    public FilesService(FilesMapper filesMapper) {
+    public FilesService(FilesMapper filesMapper, UserService userService) {
         this.filesMapper = filesMapper;
+        this.userService = userService;
     }
 
-    public int addFile(MultipartFile fileUpload) throws IOException {
+    public int addFile(MultipartFile fileUpload, String userName) throws IOException {
 
-        return filesMapper.insert(new Files(null, fileUpload.getOriginalFilename(), fileUpload.getContentType(), fileUpload.getSize(), 1, fileUpload.getInputStream()));
-
+        return filesMapper.insert(new Files(null, fileUpload.getOriginalFilename(), fileUpload.getContentType(),
+                fileUpload.getSize(), userService.getUser(userName).getUserId(),
+                fileUpload.getInputStream()));
     }
 
-    public List<Files> getFiles() {
-        return this.filesMapper.getFiles();
+    public List<Files> getFiles(String userName) {
+        return this.filesMapper.getFiles(userService.getUser(userName).getUserId());
     }
 
 }

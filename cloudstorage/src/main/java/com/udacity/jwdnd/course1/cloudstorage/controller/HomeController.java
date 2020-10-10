@@ -7,6 +7,7 @@ import com.udacity.jwdnd.course1.cloudstorage.model.NotesForm;
 import com.udacity.jwdnd.course1.cloudstorage.services.CredentialsService;
 import com.udacity.jwdnd.course1.cloudstorage.services.FilesService;
 import com.udacity.jwdnd.course1.cloudstorage.services.NotesService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,16 +36,16 @@ public class HomeController {
 
 
     @GetMapping()
-    public String homeView(@ModelAttribute("newCredential") CredentialsForm credentialsForm, @ModelAttribute("newNote") NotesForm notesForm, Model model){
+    public String homeView(Authentication authentication, @ModelAttribute("newCredential") CredentialsForm credentialsForm, @ModelAttribute("newNote") NotesForm notesForm, Model model){
         //this.credentials.add(new Credentials(12, "tepo", "tempos", "tempa", "tompo", 12));
         //this.credentials.add(new Credentials(12, "tepo", "tempos", "tempa", "tompo", 12));
         //this.credentials.add(new Credentials(12, "tepo", "tempos", "tempa", "tompo", 12));
         //this.credentials.add(new Credentials(12, "tepo", "tempos", "tempa", "tompo", 12));
         //this.credentials.add(new Credentials(12, "tepo", "tempos", "tempa", "tompo", 12));
 
-         model.addAttribute("credentials", this.credentialsService.getCredentials());
-         model.addAttribute("notes", this.notesService.getNotes());
-         model.addAttribute("files", this.filesService.getFiles());
+         model.addAttribute("credentials", this.credentialsService.getCredentials(authentication.getName()));
+         model.addAttribute("notes", this.notesService.getNotes(authentication.getName()));
+         model.addAttribute("files", this.filesService.getFiles(authentication.getName()));
         //System.out.println(credentials[1].url);
         //model.addAttribute("credentials", credentials);
         return "home";

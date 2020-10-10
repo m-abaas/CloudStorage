@@ -2,6 +2,7 @@ package com.udacity.jwdnd.course1.cloudstorage.controller;
 
 import com.udacity.jwdnd.course1.cloudstorage.model.Files;
 import com.udacity.jwdnd.course1.cloudstorage.services.FilesService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,8 +31,8 @@ public class FilesController {
     }
 
     @PostMapping
-    public String postCredentials(@RequestParam("fileUpload") MultipartFile fileUpload, Model model) throws IOException {
-        this.checkSuccess = filesService.addFile(fileUpload);
+    public String postCredentials(Authentication authentication, @RequestParam("fileUpload") MultipartFile fileUpload, Model model) throws IOException {
+        this.checkSuccess = filesService.addFile(fileUpload, authentication.getName());
         if (checkSuccess >= 1 ) {
             model.addAttribute("result", "success");
 

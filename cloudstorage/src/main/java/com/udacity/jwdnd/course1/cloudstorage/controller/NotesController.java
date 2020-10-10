@@ -2,6 +2,7 @@ package com.udacity.jwdnd.course1.cloudstorage.controller;
 
 import com.udacity.jwdnd.course1.cloudstorage.model.NotesForm;
 import com.udacity.jwdnd.course1.cloudstorage.services.NotesService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,11 +31,11 @@ public class NotesController {
     }
 
     @PostMapping
-    public String postCredentials(@ModelAttribute("newNote") NotesForm notesForm, Model model)
+    public String postCredentials(Authentication authentication, @ModelAttribute("newNote") NotesForm notesForm, Model model)
     {
         //System.out.println(notesForm.getDescription());
         //System.out.println(notesService.getNotes());
-        this.checkSuccess = notesService.addNote(notesForm);
+        this.checkSuccess = notesService.addNote(notesForm, authentication.getName());
        // System.out.println(checkSuccess);
         if (checkSuccess >= 1 ) {
             model.addAttribute("result", "success");
