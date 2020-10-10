@@ -38,4 +38,9 @@ public class CredentialsService {
         return this.credentialsMapper.getCredentials(userService.getUser(userName).getUserId());
     }
 
+    public int deleteCredential(Integer credentialId)
+    {
+        return this.credentialsMapper.delete(credentialId);
+    }
+
 }

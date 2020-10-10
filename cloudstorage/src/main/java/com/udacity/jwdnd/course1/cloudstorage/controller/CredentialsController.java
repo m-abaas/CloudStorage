@@ -5,10 +5,7 @@ import com.udacity.jwdnd.course1.cloudstorage.services.CredentialsService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/credentials")
@@ -42,6 +39,21 @@ public class CredentialsController {
         //System.out.println(credentialsForm.getUrl());
         //System.out.println(credentialsForm.getPassword());
         //System.out.println(credentialsForm.getUserName());
+        return "result";
+    }
+
+    @GetMapping("/delete_credential")
+    public String delete_credential(Model model, @RequestParam(name="credentialId") Integer credentialId)
+    {
+        this.checkSuccess = credentialsService.deleteCredential(credentialId);
+        if (checkSuccess >= 1 ) {
+            model.addAttribute("result", "success");
+
+        } else {
+            model.addAttribute("result", "failure");
+        }
+        model.addAttribute("result", "success");
+
         return "result";
     }
 

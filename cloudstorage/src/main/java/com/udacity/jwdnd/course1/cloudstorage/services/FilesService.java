@@ -34,4 +34,9 @@ public class FilesService {
         return this.filesMapper.getFiles(userService.getUser(userName).getUserId());
     }
 
+    public int deleteFile(Integer fileId)
+    {
+        return this.filesMapper.delete(fileId);
+    }
+
 }

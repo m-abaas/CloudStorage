@@ -5,10 +5,7 @@ import com.udacity.jwdnd.course1.cloudstorage.services.NotesService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.awt.desktop.SystemEventListener;
 
@@ -47,6 +44,21 @@ public class NotesController {
         //System.out.println(credentialsForm.getUrl());
         //System.out.println(credentialsForm.getPassword());
         //System.out.println(credentialsForm.getUserName());
+        return "result";
+    }
+
+    @GetMapping("/delete_note")
+    public String delete_note(Model model, @RequestParam(name="noteId") Integer noteId)
+    {
+        this.checkSuccess = notesService.deleteNote(noteId);
+        if (checkSuccess >= 1 ) {
+            model.addAttribute("result", "success");
+
+        } else {
+            model.addAttribute("result", "failure");
+        }
+        model.addAttribute("result", "success");
+
         return "result";
     }
 

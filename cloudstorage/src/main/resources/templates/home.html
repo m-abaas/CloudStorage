@@ -52,7 +52,7 @@
                         <tr th:each="file : ${files}">
                             <td>
                                 <a target="_blank" class="btn btn-success">View</a>
-                                <a  class="btn btn-danger">Delete</a>
+                                <a th:href="@{/files/delete_file(fileId=${file.fileId})}" method="GET" class="btn btn-danger">Delete</a>
                             </td>
                             <th scope="row" th:text="${file?.fileName}" >ExampleFile.txt</th>
                         </tr>
@@ -78,7 +78,7 @@
                         <tr th:each="note : ${notes}">
                             <td>
                                 <button type="button" class="btn btn-success">Edit</button>
-                                <a class="btn btn-danger">Delete</a>
+                                <a th:href="@{/notes/delete_note(noteId=${note.noteId})}" method="GET" class="btn btn-danger">Delete</a>
                             </td>
                             <th th:text="${note?.noteTitle}" scope="row">Example Note Title</th>
                             <td th:text="${note?.noteDescription}" >Example Note Description </td>
@@ -137,7 +137,7 @@
                         <tr th:each="credential : ${credentials}">
                             <td>
                                 <button type="button" class="btn btn-success">Edit</button>
-                                <a class="btn btn-danger">Delete</a>
+                                <a th:href="@{/credentials/delete_credential(credentialId=${credential.credentialId})}" method="GET" class="btn btn-danger">Delete</a>
                             </td>
                             <th scope="row"  th:text="${credential?.url}">Example Credential URL</th>
                             <td th:text="${credential?.userName}">Example Credential Username</td>

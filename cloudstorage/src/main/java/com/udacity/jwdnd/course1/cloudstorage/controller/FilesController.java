@@ -47,5 +47,20 @@ public class FilesController {
         return "result";
     }
 
+    @GetMapping("/delete_file")
+    public String delete_file(Model model, @RequestParam(name="fileId") Integer fileId)
+    {
+        this.checkSuccess = filesService.deleteFile(fileId);
+        if (checkSuccess >= 1 ) {
+            model.addAttribute("result", "success");
+
+        } else {
+            model.addAttribute("result", "failure");
+        }
+        model.addAttribute("result", "success");
+
+        return "result";
+    }
+
 }
 
