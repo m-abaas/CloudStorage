@@ -1,6 +1,9 @@
 package com.udacity.jwdnd.course1.cloudstorage.model;
 
 
+import com.udacity.jwdnd.course1.cloudstorage.services.CredentialsService;
+import com.udacity.jwdnd.course1.cloudstorage.services.EncryptionService;
+
 public class Credentials {
     private Integer credentialId;
     private String url;
@@ -38,4 +41,11 @@ public class Credentials {
     public Integer getUserId() { return userId; }
     public void setUserId(Integer userID) { this.userId = userId; }
 
+    // This function makes use of the EncryptionService to decrypt the password and populate the html model
+    public String decryptPassword()
+    {
+        EncryptionService encryptionService = new EncryptionService();
+        return encryptionService.decryptValue(this.getPassword(), this.getKey());
+    }
+    
 }

@@ -17,4 +17,7 @@ public interface NotesMapper {
     @Delete("DELETE FROM NOTES WHERE noteId = #{noteId}")
     int delete(Integer noteId);
 
+    @Select("SELECT COUNT(*) FROM NOTES WHERE noteId = #{noteId}")
+    int checkExist(Integer noteId);
+
 }

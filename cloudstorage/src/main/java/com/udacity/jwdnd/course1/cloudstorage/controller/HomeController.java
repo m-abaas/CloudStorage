@@ -43,7 +43,9 @@ public class HomeController {
         //this.credentials.add(new Credentials(12, "tepo", "tempos", "tempa", "tompo", 12));
         //this.credentials.add(new Credentials(12, "tepo", "tempos", "tempa", "tompo", 12));
 
-         model.addAttribute("credentials", this.credentialsService.getCredentials(authentication.getName()));
+        List<Credentials> credentialsList = this.credentialsService.getCredentials(authentication.getName());
+
+         model.addAttribute("credentials", credentialsList);
          model.addAttribute("notes", this.notesService.getNotes(authentication.getName()));
          model.addAttribute("files", this.filesService.getFiles(authentication.getName()));
         //System.out.println(credentials[1].url);

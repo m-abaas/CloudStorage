@@ -30,8 +30,8 @@ public class NotesController {
     @PostMapping
     public String postCredentials(Authentication authentication, @ModelAttribute("newNote") NotesForm notesForm, Model model)
     {
-        //System.out.println(notesForm.getDescription());
-        //System.out.println(notesService.getNotes());
+
+        // Check if the record already exists!
         this.checkSuccess = notesService.addNote(notesForm, authentication.getName());
        // System.out.println(checkSuccess);
         if (checkSuccess >= 1 ) {

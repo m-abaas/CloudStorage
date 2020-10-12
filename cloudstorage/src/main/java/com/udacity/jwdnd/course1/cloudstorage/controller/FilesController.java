@@ -1,15 +1,27 @@
 package com.udacity.jwdnd.course1.cloudstorage.controller;
 
+
 import com.udacity.jwdnd.course1.cloudstorage.model.Files;
 import com.udacity.jwdnd.course1.cloudstorage.services.FilesService;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.MediaType;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+
+import java.awt.*;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
 
 @Controller
 @RequestMapping("/files")
@@ -32,6 +44,7 @@ public class FilesController {
 
     @PostMapping
     public String postCredentials(Authentication authentication, @RequestParam("fileUpload") MultipartFile fileUpload, Model model) throws IOException {
+
         this.checkSuccess = filesService.addFile(fileUpload, authentication.getName());
         if (checkSuccess >= 1 ) {
             model.addAttribute("result", "success");
@@ -40,15 +53,11 @@ public class FilesController {
             model.addAttribute("result", "failure");
         }
 
-        model.addAttribute("result", "success");
-        //System.out.println(credentialsForm.getUrl());
-        //System.out.println(credentialsForm.getPassword());
-        //System.out.println(credentialsForm.getUserName());
         return "result";
     }
 
     @GetMapping("/delete_file")
-    public String delete_file(Model model, @RequestParam(name="fileId") Integer fileId)
+    public String deleteFile(Model model, @RequestParam(name="fileId") Integer fileId)
     {
         this.checkSuccess = filesService.deleteFile(fileId);
         if (checkSuccess >= 1 ) {
@@ -62,5 +71,17 @@ public class FilesController {
         return "result";
     }
 
+    @GetMapping("/download_file")
+    public ResponseEntity<InputStreamResource>  viewFile(@RequestParam(name="fileId") Integer fileId) {
+        FileDialog fileService;
+        Files file = filesService.getFile(fileId);
+        InputStreamResource resource = new InputStreamResource(new ByteArrayInputStream(file.getFileData()));
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_LANGUAGE, "attachment:filename=" + file.getFileName())
+                .contentType(MediaType.parseMediaType(file.getContentType()))
+                .body(resource);
+        }
 }
+
 

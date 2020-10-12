@@ -43,4 +43,9 @@ public class CredentialsService {
         return this.credentialsMapper.delete(credentialId);
     }
 
+    public String decryptPassword(String password)
+    {
+        return password;
+    }
+
 }

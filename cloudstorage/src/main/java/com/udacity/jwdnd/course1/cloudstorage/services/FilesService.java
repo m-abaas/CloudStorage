@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.SecureRandom;
@@ -27,7 +28,7 @@ public class FilesService {
 
         return filesMapper.insert(new Files(null, fileUpload.getOriginalFilename(), fileUpload.getContentType(),
                 fileUpload.getSize(), userService.getUser(userName).getUserId(),
-                fileUpload.getInputStream()));
+                fileUpload.getBytes()));
     }
 
     public List<Files> getFiles(String userName) {
@@ -37,6 +38,11 @@ public class FilesService {
     public int deleteFile(Integer fileId)
     {
         return this.filesMapper.delete(fileId);
+    }
+
+    public Files getFile(Integer fileId)
+    {
+        return this.filesMapper.getFile(fileId);
     }
 
 }

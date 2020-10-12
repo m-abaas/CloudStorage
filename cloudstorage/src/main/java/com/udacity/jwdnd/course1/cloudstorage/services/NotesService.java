@@ -31,6 +31,7 @@ public class NotesService {
     {
         return this.notesMapper.delete(noteId);
     }
+    public int checkExist(Integer noteId) { return this.notesMapper.checkExist(noteId);}
 
 }
 
