@@ -3,11 +3,8 @@ package com.udacity.jwdnd.course1.cloudstorage.controller;
 
 import com.udacity.jwdnd.course1.cloudstorage.model.Files;
 import com.udacity.jwdnd.course1.cloudstorage.services.FilesService;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
-import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
@@ -20,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 
 @Controller
@@ -46,12 +42,9 @@ public class FilesController {
     public String postCredentials(Authentication authentication, @RequestParam("fileUpload") MultipartFile fileUpload, Model model) throws IOException {
 
         this.checkSuccess = filesService.addFile(fileUpload, authentication.getName());
-        if (checkSuccess >= 1 ) {
-            model.addAttribute("result", "success");
+        if (checkSuccess >= 1 ) { model.addAttribute("result", "success"); }
 
-        } else {
-            model.addAttribute("result", "failure");
-        }
+        else { model.addAttribute("result", "failure"); }
 
         return "result";
     }
@@ -60,12 +53,9 @@ public class FilesController {
     public String deleteFile(Model model, @RequestParam(name="fileId") Integer fileId)
     {
         this.checkSuccess = filesService.deleteFile(fileId);
-        if (checkSuccess >= 1 ) {
-            model.addAttribute("result", "success");
+        if (checkSuccess >= 1 ) { model.addAttribute("result", "success"); }
+        else { model.addAttribute("result", "failure"); }
 
-        } else {
-            model.addAttribute("result", "failure");
-        }
         model.addAttribute("result", "success");
 
         return "result";

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.desktop.SystemEventListener;
 
 @Controller
 @RequestMapping("/notes")
@@ -44,16 +43,12 @@ public class NotesController {
     public String delete_note(Model model, @RequestParam(name="noteId") Integer noteId)
     {
         this.checkSuccess = notesService.deleteNote(noteId);
-        if (checkSuccess >= 1 ) {
-            model.addAttribute("result", "success");
+        if (checkSuccess >= 1 ) { model.addAttribute("result", "success"); }
+        else { model.addAttribute("result", "failure"); }
 
-        } else {
-            model.addAttribute("result", "failure");
-        }
         model.addAttribute("result", "success");
 
         return "result";
     }
-
 
 }
