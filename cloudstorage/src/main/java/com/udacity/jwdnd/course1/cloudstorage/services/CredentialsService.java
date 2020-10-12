@@ -18,6 +18,16 @@ public class CredentialsService {
     private EncryptionService encryptionService;
     private UserService userService;
 
+    private String getEncodedKey()
+    {
+        SecureRandom random = new SecureRandom();
+        byte[] key = new byte[16];
+        random.nextBytes(key);
+        String encodedKey = Base64.getEncoder().encodeToString(key);
+        return encodedKey;
+
+    }
+
     public CredentialsService(CredentialsMapper credentialsMapper, EncryptionService encryptionService, UserService userService) {
         this.credentialsMapper = credentialsMapper;
         this.encryptionService = encryptionService;
@@ -25,10 +35,7 @@ public class CredentialsService {
     }
 
     public int addCredential(CredentialsForm credentialsForm, String userName) {
-        SecureRandom random = new SecureRandom();
-        byte[] key = new byte[16];
-        random.nextBytes(key);
-        String encodedKey = Base64.getEncoder().encodeToString(key);
+        String encodedKey = getEncodedKey();
         return credentialsMapper.insert(new Credentials(null, credentialsForm.getUrl(), credentialsForm.getUserName(),
                 encodedKey, encryptionService.encryptValue(credentialsForm.getPassword(), encodedKey),
                 userService.getUser(userName).getUserId()));
@@ -43,9 +50,14 @@ public class CredentialsService {
         return this.credentialsMapper.delete(credentialId);
     }
 
-    public String decryptPassword(String password)
+    public int updateCredential(CredentialsForm credentialsForm, String userName)
     {
-        return password;
+        String encodedKey = getEncodedKey();
+        // The user ID is be
+        return credentialsMapper.update(new Credentials(credentialsForm.getCredentialId(), credentialsForm.getUrl(), credentialsForm.getUserName(),
+                encodedKey, encryptionService.encryptValue(credentialsForm.getPassword(), encodedKey),
+                userService.getUser(userName).getUserId()));
+
     }
 
 }

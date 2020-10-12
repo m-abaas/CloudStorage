@@ -28,17 +28,13 @@ public class CredentialsController {
     @PostMapping
     public String postCredentials(Authentication authentication, @ModelAttribute("newCredential") CredentialsForm credentialsForm, Model model)
     {
-        this.checkSuccess = credentialsService.addCredential(credentialsForm, authentication.getName());
-        if (checkSuccess >= 1 ) {
-            model.addAttribute("result", "success");
+        // Check if that specific credential ID already exists
+        if(credentialsForm.getCredentialId() != null) { this.checkSuccess = credentialsService.updateCredential(credentialsForm, authentication.getName()); }
+        else { this.checkSuccess = credentialsService.addCredential(credentialsForm, authentication.getName()); }
 
-        } else {
-            model.addAttribute("result", "failure");
-        }
+        if (checkSuccess >= 1 ) { model.addAttribute("result", "success"); }
+        else { model.addAttribute("result", "failure"); }
 
-        //System.out.println(credentialsForm.getUrl());
-        //System.out.println(credentialsForm.getPassword());
-        //System.out.println(credentialsForm.getUserName());
         return "result";
     }
 

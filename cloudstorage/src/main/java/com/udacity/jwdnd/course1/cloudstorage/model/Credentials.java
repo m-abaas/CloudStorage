@@ -39,7 +39,7 @@ public class Credentials {
     public void setPassword(String password) { this.password = password; }
 
     public Integer getUserId() { return userId; }
-    public void setUserId(Integer userID) { this.userId = userId; }
+    public void setUserId(Integer userId) { this.userId = userId; }
 
     // This function makes use of the EncryptionService to decrypt the password and populate the html model
     public String decryptPassword()
@@ -47,5 +47,5 @@ public class Credentials {
         EncryptionService encryptionService = new EncryptionService();
         return encryptionService.decryptValue(this.getPassword(), this.getKey());
     }
-    
+
 }

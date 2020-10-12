@@ -30,20 +30,13 @@ public class NotesController {
     @PostMapping
     public String postCredentials(Authentication authentication, @ModelAttribute("newNote") NotesForm notesForm, Model model)
     {
-
         // Check if the record already exists!
-        this.checkSuccess = notesService.addNote(notesForm, authentication.getName());
-       // System.out.println(checkSuccess);
-        if (checkSuccess >= 1 ) {
-            model.addAttribute("result", "success");
+        if(notesForm.getNoteId()!= null) { this.checkSuccess = notesService.updateNote(notesForm, authentication.getName()); }
+        else { this.checkSuccess = notesService.addNote(notesForm, authentication.getName()); }
 
-        } else {
-            model.addAttribute("result", "failure");
-        }
+        if (checkSuccess >= 1 ) { model.addAttribute("result", "success"); }
+        else { model.addAttribute("result", "failure"); }
 
-        //System.out.println(credentialsForm.getUrl());
-        //System.out.println(credentialsForm.getPassword());
-        //System.out.println(credentialsForm.getUserName());
         return "result";
     }
 

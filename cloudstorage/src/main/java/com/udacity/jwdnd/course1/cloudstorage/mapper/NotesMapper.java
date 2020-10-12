@@ -20,4 +20,8 @@ public interface NotesMapper {
     @Select("SELECT COUNT(*) FROM NOTES WHERE noteId = #{noteId}")
     int checkExist(Integer noteId);
 
+    @Update("UPDATE NOTES SET notetitle =  #{noteTitle}, notedescription = #{noteDescription}," +
+            "userid = #{userId} WHERE noteId = #{noteId}")
+    int update(Notes notes);
+
 }

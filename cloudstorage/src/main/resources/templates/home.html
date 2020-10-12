@@ -103,7 +103,7 @@
                             </div>
                             <div class="modal-body">
                                 <form action="#" th:object="${newNote}" method="POST" th:action="@{/notes}">
-                                    <input type="hidden" name="noteId" id="note-id">
+                                    <input th:field="*{noteId}" type="hidden" name="noteId" id="note-id">
                                     <div class="form-group">
                                         <label for="note-title" class="col-form-label">Title</label>
                                         <input th:field="*{title}" type="text" name= "noteTitle" class="form-control"  id="note-title" maxlength="20" required>
@@ -169,7 +169,7 @@
                             </div>
                             <div class="modal-body">
                                 <form action="#" th:object="${newCredential}" method="POST" th:action="@{/credentials}">
-                                    <input type="hidden" name="credentialId" id="credential-id">
+                                    <input type="hidden" name="credentialId" th:field="*{credentialId}" id="credential-id">
                                     <div class="form-group">
                                         <label for="note-title" class="col-form-label" >URL</label>
                                         <input type="text" name= "url" class="form-control" th:field="*{url}" id="credential-url" maxlength="100" required>

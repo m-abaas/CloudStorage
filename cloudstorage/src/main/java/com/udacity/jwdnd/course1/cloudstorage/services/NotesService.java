@@ -33,6 +33,12 @@ public class NotesService {
     }
     public int checkExist(Integer noteId) { return this.notesMapper.checkExist(noteId);}
 
+    public int updateNote(NotesForm notesForm, String userName) {
+        return notesMapper.update(new Notes(notesForm.getNoteId(), notesForm.getTitle(),
+                notesForm.getDescription(), userService.getUser(userName).getUserId()));
+
+    }
+
 }
 
 
