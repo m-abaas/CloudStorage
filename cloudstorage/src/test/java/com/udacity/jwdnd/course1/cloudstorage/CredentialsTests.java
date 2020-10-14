@@ -187,15 +187,59 @@ public class CredentialsTests {
     @Test
     public void viewAndEdit() throws InterruptedException {
 
+        // New replacement data
+        String newFirstUrl = "www.linkedin.com";
+        String newFirstUserName = "Mustafa Abbas Ismail Said";
+        String newFirstPassword = "321";
+
+        String newSecondUrl = "www.github.com";
+        String newSecondUserName = "M.Abbas Ismail Said";
+        String newSecondPassword = "654";
+
+        String newThirdUrl = "www.twitter.com";
+        String newThirdUserName = "Mustafa Abbas Ismail Said";
+        String newThirdPassword = "987";
+
+        List<String> newUrlList = new ArrayList<>();
+        newUrlList.add(newFirstUrl); newUrlList.add(newSecondUrl); newUrlList.add(newThirdUrl);
+
+        List<String> newUserNameList = new ArrayList<>();
+        newUserNameList.add(newFirstUserName); newUserNameList.add(newSecondUserName); newUserNameList.add(newThirdUserName);
+
+        List<String> newPasswordList = new ArrayList<>();
+        newPasswordList.add(newFirstPassword); newPasswordList.add(newSecondPassword); newPasswordList.add(newThirdPassword);
+
+
+        for(int i = 0; i < this.NumberOfCredentials; i++) {
+
+            homePage.goToCredentialsTab();
+            accommodateForPageLoadTime();
+
+            homePage.clickOnEditCredential(i);
+            homePage.fillInCredentialForm(newUrlList.get(i), newUserNameList.get(i), newPasswordList.get(i));
+
+            homePage.clickOnSubmitDescriptionButton();
+            accommodateForPageLoadTime();
+
+            resultPage.clickHereToGoBack();
+            accommodateForPageLoadTime();
+
+        }
+
+        // Verifying new data is displayed accurately
+
         homePage.goToCredentialsTab();
         accommodateForPageLoadTime();
 
-        for(int i = 0; i < 1; i++) {
-            homePage.clickOnEditCredential(i);
-            System.out.println(homePage.getCredentialUrlAfterClickingEdit());
-            System.out.println(homePage.getCredentialPasswordAfterClickingEdit());
-            System.out.println(homePage.getCredentialUserNameAfterClickingEdit());
+        List<String> retrievedUrls = homePage.getDisplayedCredentialsUrls();
+        List<String> retrievedUserNames = homePage.getDisplayedCredentialsUserName();
+        List<String> retrievedPasswords = homePage.getDisplayedCredentialsPassword();
 
+        for(int i = 0; i < this.NumberOfCredentials; i++)
+        {
+            assertEquals(newUrlList.get(i), retrievedUrls.get(i));
+            assertEquals(newUserNameList.get(i), retrievedUserNames.get(i));
+            assertNotEquals(newPasswordList.get(i), retrievedPasswords.get(i));
         }
 
     }

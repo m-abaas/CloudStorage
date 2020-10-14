@@ -113,8 +113,13 @@ public class HomePage {
 
     public void fillInCredentialForm(String url, String userName, String password)
     {
+        this.credentialUrlField.clear();
         this.credentialUrlField.sendKeys(url);
+
+        this.credentialUserNameField.clear();
         this.credentialUserNameField.sendKeys(userName);
+
+        this.credentialPasswordField.clear();
         this.credentialPasswordField.sendKeys(password);
     }
 
@@ -204,20 +209,11 @@ public class HomePage {
         this.listedCredentialEditButtons.get(index).click();
     }
 
-    public String getCredentialUrlAfterClickingEdit()
+    public void clearTheCredentialForm()
     {
-        return this.credentialUrlField.getText();
+        this.credentialUrlField.clear();
+        this.credentialUserNameField.clear();
+        this.credentialPasswordField.clear();
     }
-
-    public String getCredentialUserNameAfterClickingEdit()
-    {
-        return this.credentialUserNameField.getText();
-    }
-
-    public String getCredentialPasswordAfterClickingEdit()
-    {
-        return this.credentialPasswordField.getText();
-    }
-
 
 }
