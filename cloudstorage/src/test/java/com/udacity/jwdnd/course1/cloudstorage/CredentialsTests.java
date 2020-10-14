@@ -216,7 +216,10 @@ public class CredentialsTests {
             accommodateForPageLoadTime();
 
             homePage.clickOnEditCredential(i);
+            accommodateForPageLoadTime();
+
             homePage.fillInCredentialForm(newUrlList.get(i), newUserNameList.get(i), newPasswordList.get(i));
+            accommodateForPageLoadTime();
 
             homePage.clickOnSubmitDescriptionButton();
             accommodateForPageLoadTime();

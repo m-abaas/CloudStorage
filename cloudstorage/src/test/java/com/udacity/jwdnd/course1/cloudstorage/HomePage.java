@@ -36,7 +36,7 @@ public class HomePage {
     @FindBy(id = "note-description")
     private WebElement noteDescriptionField;
 
-    @FindBy(id = "credential-url")
+   @FindBy(id = "credential-url")
     private WebElement credentialUrlField;
 
     @FindBy(id = "credential-username")
@@ -214,6 +214,11 @@ public class HomePage {
         this.credentialUrlField.clear();
         this.credentialUserNameField.clear();
         this.credentialPasswordField.clear();
+    }
+
+    public String getCurrentUrl()
+    {
+        return this.credentialUrlField.getText();
     }
 
 }
