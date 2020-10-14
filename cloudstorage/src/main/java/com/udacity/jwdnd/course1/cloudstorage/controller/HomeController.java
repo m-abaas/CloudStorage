@@ -1,8 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage.controller;
 
-import com.udacity.jwdnd.course1.cloudstorage.model.Credentials;
 import com.udacity.jwdnd.course1.cloudstorage.model.CredentialsForm;
-import com.udacity.jwdnd.course1.cloudstorage.model.Notes;
 import com.udacity.jwdnd.course1.cloudstorage.model.NotesForm;
 import com.udacity.jwdnd.course1.cloudstorage.services.CredentialsService;
 import com.udacity.jwdnd.course1.cloudstorage.services.FilesService;
@@ -14,16 +12,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/home")
 public class HomeController {
 
-    private CredentialsService credentialsService;
-    private NotesService notesService;
-    private FilesService filesService;
+    private final CredentialsService credentialsService;
+    private final NotesService notesService;
+    private final FilesService filesService;
     //private List<Credentials> credentials;
 
     public HomeController(CredentialsService credentialsService, NotesService notesService, FilesService filesService)

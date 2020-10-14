@@ -3,10 +3,7 @@ package com.udacity.jwdnd.course1.cloudstorage.services;
 import com.udacity.jwdnd.course1.cloudstorage.mapper.CredentialsMapper;
 import com.udacity.jwdnd.course1.cloudstorage.model.Credentials;
 import com.udacity.jwdnd.course1.cloudstorage.model.CredentialsForm;
-import org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapProperties;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.List;
@@ -14,17 +11,16 @@ import java.util.List;
 @Service
 public class CredentialsService {
 
-    private CredentialsMapper credentialsMapper;
-    private EncryptionService encryptionService;
-    private UserService userService;
+    private final CredentialsMapper credentialsMapper;
+    private final EncryptionService encryptionService;
+    private final UserService userService;
 
     private String getEncodedKey()
     {
         SecureRandom random = new SecureRandom();
         byte[] key = new byte[16];
         random.nextBytes(key);
-        String encodedKey = Base64.getEncoder().encodeToString(key);
-        return encodedKey;
+        return Base64.getEncoder().encodeToString(key);
 
     }
 

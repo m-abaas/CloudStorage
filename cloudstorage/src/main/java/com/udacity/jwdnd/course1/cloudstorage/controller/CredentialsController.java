@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/credentials")
 public class CredentialsController {
 
-    private CredentialsService credentialsService;
+    private final CredentialsService credentialsService;
     private int checkSuccess;
 
     public CredentialsController(CredentialsService credentialsService)

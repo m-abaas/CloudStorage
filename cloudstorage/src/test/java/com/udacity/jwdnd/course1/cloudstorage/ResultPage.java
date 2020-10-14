@@ -16,7 +16,6 @@ public class ResultPage {
     {
         PageFactory.initElements(webDriver, this);
     }
-
     public void clickHereToGoBack()
     {
         clickHereButton.click();

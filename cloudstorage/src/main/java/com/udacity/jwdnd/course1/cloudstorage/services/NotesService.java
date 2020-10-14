@@ -4,14 +4,13 @@ import com.udacity.jwdnd.course1.cloudstorage.mapper.NotesMapper;
 import com.udacity.jwdnd.course1.cloudstorage.model.Notes;
 import com.udacity.jwdnd.course1.cloudstorage.model.NotesForm;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
 public class NotesService {
 
-    private NotesMapper notesMapper;
-    private UserService userService;
+    private final NotesMapper notesMapper;
+    private final UserService userService;
 
     public NotesService(NotesMapper notesMapper, UserService userService) {
         this.notesMapper = notesMapper;

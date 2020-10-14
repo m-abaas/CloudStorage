@@ -12,8 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-
 import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -24,7 +22,7 @@ import java.io.IOException;
 public class FilesController {
 
 
-    private FilesService filesService;
+    private final FilesService filesService;
     private int checkSuccess;
 
     public FilesController(FilesService filesService)

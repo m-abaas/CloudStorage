@@ -17,8 +17,6 @@ public class NoteTests {
     private Integer port;
 
     private static WebDriver driver;
-    private LoginPage loginPage;
-    private SignupPage signupPage;
     private HomePage homePage;
     private ResultPage resultPage;
 
@@ -39,8 +37,8 @@ public class NoteTests {
     @BeforeEach
     public void beforeEach() throws InterruptedException {
         driver.get("http://localhost:" + port + "/login");
-        loginPage = new LoginPage(driver);
-        signupPage = new SignupPage(driver);
+        LoginPage loginPage = new LoginPage(driver);
+        SignupPage signupPage = new SignupPage(driver);
         homePage = new HomePage(driver);
         resultPage = new ResultPage(driver);
 

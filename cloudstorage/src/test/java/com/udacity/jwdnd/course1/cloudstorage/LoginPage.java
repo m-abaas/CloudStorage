@@ -38,12 +38,6 @@ public class LoginPage {
     {
         this.signupButton.click();
     }
-
-    public void waitForPageLoading(WebDriver driver)
-    {
-        WebDriverWait wait =  new WebDriverWait(driver, 2);
-        WebElement marker = wait.until(webDriver -> webDriver.findElement(By.id("loginPageCompleted")));
-    }
 }
 
 

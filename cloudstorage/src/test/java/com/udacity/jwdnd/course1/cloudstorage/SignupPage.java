@@ -1,11 +1,10 @@
 package com.udacity.jwdnd.course1.cloudstorage;
 
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SignupPage {
 
@@ -46,12 +45,6 @@ public class SignupPage {
     public void goBackToLoginPage()
     {
         this.backToLoginPage.click();
-    }
-
-    public void waitForPageLoading(WebDriver driver)
-    {
-        WebDriverWait wait =  new WebDriverWait(driver, 2);
-        WebElement marker = wait.until(webDriver -> webDriver.findElement(By.id("signupPageCompleted")));
     }
 
 }

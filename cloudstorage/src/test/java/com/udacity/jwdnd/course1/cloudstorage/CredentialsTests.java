@@ -4,7 +4,6 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,8 +23,6 @@ public class CredentialsTests {
     private Integer port;
 
     private static WebDriver driver;
-    private LoginPage loginPage;
-    private SignupPage signupPage;
     private HomePage homePage;
     private ResultPage resultPage;
 
@@ -56,8 +53,8 @@ public class CredentialsTests {
     public void beforeEach() throws InterruptedException {
 
         driver.get("http://localhost:" + port + "/login");
-        loginPage = new LoginPage(driver);
-        signupPage = new SignupPage(driver);
+        LoginPage loginPage = new LoginPage(driver);
+        SignupPage signupPage = new SignupPage(driver);
         homePage = new HomePage(driver);
         resultPage = new ResultPage(driver);
 

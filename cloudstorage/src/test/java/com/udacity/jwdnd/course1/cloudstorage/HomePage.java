@@ -9,7 +9,6 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,10 +104,6 @@ public class HomePage {
         this.addNewCredentialButton.click();
     }
 
-    public void waitForPageLoading(WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, 2);
-        WebElement marker = wait.until(webDriver -> webDriver.findElement(By.id("homePageCompleted")));
-    }
 
     public void fillInNoteForm(String title, String description) {
         this.noteTitleField.sendKeys(title);
