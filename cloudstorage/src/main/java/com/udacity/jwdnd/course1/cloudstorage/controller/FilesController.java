@@ -39,6 +39,11 @@ public class FilesController {
     @PostMapping
     public String postCredentials(Authentication authentication, @RequestParam("fileUpload") MultipartFile fileUpload, Model model) throws IOException {
 
+        if(filesService.checkForFileName(fileUpload.getOriginalFilename()) >= 1)
+        {
+            // This means that there is a file in the database with the same name
+            return "duplicate-file-name";
+        }
         this.checkSuccess = filesService.addFile(fileUpload, authentication.getName());
         if (checkSuccess >= 1 ) { model.addAttribute("result", "success"); }
 

@@ -39,4 +39,9 @@ public class FilesService {
         return this.filesMapper.getFile(fileId);
     }
 
+    public Integer checkForFileName(String fileName)
+    {
+        return filesMapper.checkForFileName(fileName);
+    }
+
 }

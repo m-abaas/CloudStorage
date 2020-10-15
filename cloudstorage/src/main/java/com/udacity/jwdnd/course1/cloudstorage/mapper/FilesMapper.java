@@ -19,4 +19,7 @@ public interface FilesMapper {
 
     @Delete("DELETE FROM FILES WHERE fileId = #{fileId}")
     int delete(Integer fileId);
+
+    @Select("SELECT COUNT(*) FROM FILES WHERE filename = #{fileName}")
+    int checkForFileName(String fileName);
 }
